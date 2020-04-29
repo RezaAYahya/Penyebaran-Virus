@@ -23,8 +23,10 @@ x_pos = []
 y_pos = []
 
 pos = []
-animasi = []
+animasi = np.zeros((jumlahIndividu, jumlahIndividu))
 animasiInfeksi = []
+x = [0]
+y = [0]
 # POINT 2
 # Inisialisasi Variable List :
 individu = []
@@ -119,9 +121,10 @@ while (infeksiSementara > 0):
         x_pos[j] = koreksi[0]
         y_pos[j] = koreksi[1]
 
-        pos = [x_pos, y_pos]
+        # pos = [x_pos[j], y_pos[j]]
         if (statusInfeksi[j]):
-            animasiInfeksi = np.c_[pos]
+            x.append(x_pos[j])
+            y.append(y_pos[j])
         else:
             animasi = np.c_[pos]
 
@@ -129,19 +132,21 @@ while (infeksiSementara > 0):
     totalInfeksi.append(infeksiSementara)
     plt.figure(1)
     plt.subplot(1, 2, 1)
-    if (animasiInfeksi != []):
-        plt.scatter(*animasiInfeksi, c="red", s=25)
-    if (animasi != []):
-        plt.scatter(*animasi, c="green", s=25)
+    # if (animasiInfeksi != []):
+    plt.scatter(x,y, c="red", s=25)
+    # if (animasi != []):
+        # plt.scatter(*animasi, c="green", s=25)
 
     plt.title("Simulasi Random Walk Penyebaran Virus")
     plt.subplot(1, 2, 2)
     plt.plot(totalInfeksi, c='blue')
     Camera.snap()
-    if (infeksiSementara > 0):
-        animasi = []
-        animasiInfeksi = []
-
+    # if (infeksiSementara > 0):
+    # animasi = []
+    # animasiInfeksi = []
+    # print(len(animasiInfeksi[0]))
+    x = []
+    y = []
 
 anim = Camera.animate(interval=1000)
 plt.grid(True, which="both")
