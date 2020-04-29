@@ -1,7 +1,5 @@
 import random
-import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from celluloid import Camera as Camera
 
 """
@@ -103,8 +101,12 @@ while (infeksiSementara > 0):
     hari += 1
     for j in range(jumlahIndividu):
         # Update posisi berdasarkan probabilitas individu bergerak
-        updatePosisi = posisi(x_pos[j], y_pos[j])
-
+        randProb = random.uniform(0,1)
+        if(randProb >= probMove):
+            updatePosisi = posisi(x_pos[j], y_pos[j])
+        else:
+            updatePosisi = [x_pos[j], y_pos[j]]
+            
         # Koreksi dengan PBC
         koreksi = pbc(updatePosisi[0], updatePosisi[1])
 
@@ -138,13 +140,11 @@ while (infeksiSementara > 0):
 
     # Perubahan infeksi
     totalInfeksi.append(infeksiSementara)
+    # Plotting
     plt.figure(1)
     plt.subplot(1, 2, 1)
-    
-    plt.scatter(x_infeksi,y_infeksi, c="green", s=25)
-    
-    plt.scatter(x_sehat, y_sehat, c="red", s=25)
-
+    plt.scatter(x_sehat, y_sehat, c="green", s=25)
+    plt.scatter(x_infeksi,y_infeksi, c="red", s=25)
     plt.title("Simulasi Random Walk Penyebaran Virus")
     plt.subplot(1, 2, 2)
     plt.plot(totalInfeksi, c='blue')
@@ -155,6 +155,7 @@ while (infeksiSementara > 0):
     x_sehat = []
     y_sehat = []
 
+# Animasi
 anim = Camera.animate(interval=1000)
 plt.grid(True, which="both")
 plt.legend()
