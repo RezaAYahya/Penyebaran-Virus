@@ -107,7 +107,11 @@ while (infeksiSementara > 0):
     hari += 1
     for j in range(jumlahIndividu):
         # Update posisi berdasarkan probabilitas individu bergerak
-        updatePosisi = posisi(x_pos[j], y_pos[j])
+        randProb = random.uniform(0,1)
+        if(randProb >= probMove):
+            updatePosisi = posisi(x_pos[j], y_pos[j])
+        else:
+            updatePosisi = [x_pos[j], y_pos[j]]
 
         # Koreksi dengan PBC
         koreksi = pbc(updatePosisi[0], updatePosisi[1])
