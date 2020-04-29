@@ -7,9 +7,9 @@ from celluloid import Camera as Camera
 """
 TUBES MOSI PENYEBARAN VIRUS
 Anggota Kelompk:
-Imaduddin M. Fadhil
-M. Faishal Darma Putra
-Reza Ahmad Yahya
+Imaduddin M. Fadhil / 1301184115
+M. Faishal Darma Putra / 1301183483
+Reza Ahmad Yahya / 1301184403
 """
 
 
@@ -30,17 +30,13 @@ x_range = x_max - x_min
 y_range = y_max - y_min
 x_pos = []
 y_pos = []
-
-pos = []
-animasi = np.zeros((jumlahIndividu, jumlahIndividu))
-animasiInfeksi = []
 x_infeksi = [0]
 y_infeksi = [0]
 x_sehat = [0]
 y_sehat = [0]
+
 # POINT 2
 # Inisialisasi Variable List :
-individu = []
 statusInfeksi = []
 statusImun = []
 waktuInfeksi = []
@@ -107,11 +103,7 @@ while (infeksiSementara > 0):
     hari += 1
     for j in range(jumlahIndividu):
         # Update posisi berdasarkan probabilitas individu bergerak
-        randProb = random.uniform(0,1)
-        if(randProb >= probMove):
-            updatePosisi = posisi(x_pos[j], y_pos[j])
-        else:
-            updatePosisi = [x_pos[j], y_pos[j]]
+        updatePosisi = posisi(x_pos[j], y_pos[j])
 
         # Koreksi dengan PBC
         koreksi = pbc(updatePosisi[0], updatePosisi[1])
@@ -148,19 +140,16 @@ while (infeksiSementara > 0):
     totalInfeksi.append(infeksiSementara)
     plt.figure(1)
     plt.subplot(1, 2, 1)
-    # if (animasiInfeksi != []):
-    plt.scatter(x_infeksi,y_infeksi, c="red", s=25)
-    # if (animasi != []):
-    plt.scatter(x_sehat, y_sehat, c="green", s=25)
+    
+    plt.scatter(x_infeksi,y_infeksi, c="green", s=25)
+    
+    plt.scatter(x_sehat, y_sehat, c="red", s=25)
 
     plt.title("Simulasi Random Walk Penyebaran Virus")
     plt.subplot(1, 2, 2)
     plt.plot(totalInfeksi, c='blue')
     Camera.snap()
-    # if (infeksiSementara > 0):
-    # animasi = []
-    # animasiInfeksi = []
-    # print(len(animasiInfeksi[0]))
+    
     x_infeksi = []
     y_infeksi = []
     x_sehat = []
