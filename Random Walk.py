@@ -4,6 +4,15 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from celluloid import Camera as Camera
 
+"""
+TUBES MOSI PENYEBARAN VIRUS
+Anggota Kelompk:
+Imaduddin M. Fadhil
+M. Faishal Darma Putra
+Reza Ahmad Yahya
+"""
+
+
 # POINT 1
 # Inisialisasi variable scalar :
 jumlahIndividu = 200
